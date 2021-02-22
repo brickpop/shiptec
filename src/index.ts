@@ -33,7 +33,7 @@ function checkAvailable() {
 }
 
 function checkAccount(credentials: StockabeeAuth) {
-    if (!credentials) throw new Error("Uninitialized")
+    if (!credentials) throw new Error("Empty credentials")
 
     const url = STOCKABEE_URL_PREFIX + "/account"
     return axios.post(url, credentials)
