@@ -50,6 +50,60 @@ export declare type SbOrderPostPayload = {
         /** Order detail/line grand total */
         total: number;
     }[];
+    /** Date time placed `YYYY-MM-DD HH:mm:ss` */
+    date_time?: string;
+    /** Order currency code Defaults to 978 (euro) */
+    currency?: string;
+    /** The order status ID on your system */
+    status_id?: string;
+    /** The order status name on your system */
+    status_name?: string;
+    /** Order pay method ID on your system */
+    payment_id?: string;
+    /** Order pay method name on your system */
+    payment_name?: string;
+    /** Order shipping method ID on your system */
+    shipping_id?: string;
+    /** Order shipping method name on your system */
+    shipping_name?: string;
+    /** Customer company name */
+    customer_company?: string;
+    /** Customer language iso-2 code */
+    customer_language_iso?: string;
+    /** Delivery address ID on your system */
+    ad_alias?: string;
+    /** Delivery address alias */
+    ad_company?: string;
+    /** Recipient company name */
+    ad_identity?: string;
+    /** Recipient identity number */
+    ai_id?: string;
+    /** Invoice address ID on your system Invoice address alias */
+    ai_alias?: string;
+    /** Invoice first name */
+    ai_firstname?: string;
+    /** Invoice last name */
+    ai_lastname?: string;
+    /** Invoice company name */
+    ai_company?: string;
+    /** Invoice identity number */
+    ai_identity?: string;
+    /** Invoice phone number */
+    ai_phone?: string;
+    /** Invoice address */
+    ai_address?: string;
+    /** Invoice post code */
+    ai_postcode?: string;
+    /** Invoice city */
+    ai_city?: string;
+    /** Invoice state */
+    ai_state?: string;
+    /** Invoice iso-2 country code */
+    ai_country_iso?: string;
+    /** Order delivery notes */
+    order_notes?: string;
+    /** Warehouse internal fulfillment notes */
+    fulfill_notes?: string;
 };
 export declare type SbOrderPostPayloadFull = StockabeeAuth & SbOrderPostPayload;
 export declare type SbOrderPostResponse = {
