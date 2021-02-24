@@ -1,16 +1,16 @@
-# Stockabee
+# Shiptec API wrapper
 
 This repo is available to be included as a submodule. Future versions will be on NPM.
 
 ### Install
 ```sh
-git submodule add https://github.com/brickpop/stockabee.git lib/stockabee
+git submodule add https://github.com/brickpop/shiptec.git lib/shiptec
 ```
 
 ### Usage
 
 ```typescript
-import { init, postOrder, getOrderStatus, postProduct, getProductStocks } from "lib/stockabee"
+import { init, postOrder, getOrderStatus, postProduct, getProductStocks } from "lib/shiptec"
 
 await init({
     token: "1234",
@@ -25,5 +25,5 @@ await getProductStocks().then(console.log)
 
 ### Types
 ```typescript
-import {StockabeeAuth, SbOrderPostPayload, SbOrderPostResponse, SbOrderStatus, SbProductPayload, SbProductPostResponse, SbStockStatus} from "lib/stockabee"
+import {StockabeeAuth, SbOrderPostPayload, SbOrderPostResponse, SbOrderStatus, SbProductPayload, SbProductPostResponse, SbStockStatus} from "lib/shiptec"
 ```
