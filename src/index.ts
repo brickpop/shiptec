@@ -3,7 +3,7 @@ import { SbOrderPostPayload, SbOrderPostResponse, SbOrderStatus, SbProductPayloa
 export * from "./types"
 
 let auth: StockabeeAuth
-const STOCKABEE_URL_PREFIX = "https://blackbox.shiptec.io/channels/priv"
+const SHIPTEC_URL_PREFIX = "https://blackbox.shiptec.io/channels/priv"
 
 // MAIN
 
@@ -20,7 +20,7 @@ export function init(credentials: StockabeeAuth) {
 // HELPERS
 
 function checkAvailable() {
-    const url = STOCKABEE_URL_PREFIX + "/ping"
+    const url = SHIPTEC_URL_PREFIX + "/ping"
     return axios.get(url)
         .then(response => {
             if (response.status != 200) throw new Error("Status " + response.status)
@@ -35,7 +35,7 @@ function checkAvailable() {
 function checkAccount(credentials: StockabeeAuth) {
     if (!credentials) throw new Error("Empty credentials")
 
-    const url = STOCKABEE_URL_PREFIX + "/account"
+    const url = SHIPTEC_URL_PREFIX + "/account"
     return axios.post(url, credentials)
         .then(response => {
             if (response.status != 200) throw new Error("Status " + response.status)
@@ -50,7 +50,7 @@ function checkAccount(credentials: StockabeeAuth) {
 export function postOrder(order: SbOrderPostPayload): Promise<void> {
     if (!auth) throw new Error("Uninitialized")
 
-    const url = STOCKABEE_URL_PREFIX + "/orders"
+    const url = SHIPTEC_URL_PREFIX + "/orders"
     const params = Object.assign({}, auth, order)
     return axios.post(url, params)
         .then(response => {
@@ -70,7 +70,7 @@ export function postOrder(order: SbOrderPostPayload): Promise<void> {
 export function getOrderStatus(id: string): Promise<SbOrderStatus> {
     if (!auth) throw new Error("Uninitialized")
 
-    const url = STOCKABEE_URL_PREFIX + "/orders/" + id + "/status"
+    const url = SHIPTEC_URL_PREFIX + "/orders/" + id + "/status"
     // return axios.get(url, { headers: { token: auth.token } })
     return axios.post(url, { token: auth.token })
         .then(response => {
@@ -88,7 +88,7 @@ export function getOrderStatus(id: string): Promise<SbOrderStatus> {
 export function postProduct(product: SbProductPayload): Promise<void> {
     if (!auth) throw new Error("Uninitialized")
 
-    const url = STOCKABEE_URL_PREFIX + "/products"
+    const url = SHIPTEC_URL_PREFIX + "/products"
     const params = Object.assign({}, auth, product)
     return axios.post(url, params)
         .then(response => {
@@ -108,7 +108,7 @@ export function postProduct(product: SbProductPayload): Promise<void> {
 export function getProductStocks(): Promise<SbStockStatus> {
     if (!auth) throw new Error("Uninitialized")
 
-    const url = STOCKABEE_URL_PREFIX + "/stocks"
+    const url = SHIPTEC_URL_PREFIX + "/stocks"
     // return axios.get(url, { headers: { token: auth.token } })
     return axios.post(url, auth)
         .then(response => {
