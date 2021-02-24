@@ -88,6 +88,9 @@ export function getOrderStatus(id: string): Promise<SbOrderStatus> {
 export function postProduct(product: SbProductPayload): Promise<void> {
     if (!auth) throw new Error("Uninitialized")
 
+    // Ensure that the product ID is unique by appending the SKU
+    product.id_product = product.id_product + "-" + product.reference
+
     const url = SHIPTEC_URL_PREFIX + "/products"
     const params = Object.assign({}, auth, product)
     return axios.post(url, params)
@@ -115,7 +118,13 @@ export function getProductStocks(): Promise<SbStockStatus> {
             if (response.status != 200) throw new Error("Status " + response.status)
             else if (typeof response.data != "object") throw new Error("Invalid response: " + typeof response.data)
 
-            return response.data
+            return (response.data as SbStockStatus).map(item => {
+                const idx = item.id_product.lastIndexOf("-")
+                if (idx >= 0) {
+                    item.id_product = item.id_product.substr(0, idx)
+                }
+                return item
+            })
         })
         .catch(err => {
             console.error(err)
