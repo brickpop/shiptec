@@ -75,6 +75,7 @@ export function getOrderStatus(id: string): Promise<SbOrderStatus> {
         .then(response => {
             if (response.status != 200) throw new Error("Status " + response.status)
             else if (typeof response.data != "object") throw new Error("Invalid response: " + typeof response.data)
+            else if (response.data.error) throw new Error(response.data.error)
 
             return response.data
         })
