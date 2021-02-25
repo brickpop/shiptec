@@ -71,8 +71,7 @@ export function getOrderStatus(id: string): Promise<SbOrderStatus> {
     if (!auth) throw new Error("Uninitialized")
 
     const url = SHIPTEC_URL_PREFIX + "/orders/" + id + "/status"
-    // return axios.get(url, { headers: { token: auth.token } })
-    return axios.post(url, { token: auth.token })
+    return axios.post(url, auth)
         .then(response => {
             if (response.status != 200) throw new Error("Status " + response.status)
             else if (typeof response.data != "object") throw new Error("Invalid response: " + typeof response.data)
@@ -131,3 +130,4 @@ export function getProductStocks(): Promise<SbStockStatus> {
             throw err
         })
 }
+
