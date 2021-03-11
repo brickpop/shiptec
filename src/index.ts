@@ -51,6 +51,13 @@ export function postOrder(order: SbOrderPostPayload): Promise<void> {
     if (!auth) throw new Error("Uninitialized")
 
     const url = SHIPTEC_URL_PREFIX + "/orders"
+
+    // WARNING: Workaround to ensure that the product ID is unique by appending the SKU
+    order.details = order.details.map(item => {
+        item.product_id = item.product_id + "-" + item.reference
+        return item
+    })
+
     const params = Object.assign({}, auth, order)
     return axios.post(url, params)
         .then(response => {
@@ -88,7 +95,7 @@ export function getOrderStatus(id: string): Promise<SbOrderStatus> {
 export function postProduct(product: SbProductPayload): Promise<void> {
     if (!auth) throw new Error("Uninitialized")
 
-    // Ensure that the product ID is unique by appending the SKU
+    // WARNING: Workaround to ensure that the product ID is unique by appending the SKU
     product.id_product = product.id_product + "-" + product.reference
 
     const url = SHIPTEC_URL_PREFIX + "/products"
