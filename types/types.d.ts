@@ -150,6 +150,8 @@ export declare type SbOrderStatus = {
 export declare type SbProductPayload = {
     /** The product ID on your system */
     id_product: string;
+    /** The product attribute/variant ID on your system */
+    id_product_attribute?: string;
     /** SKU */
     reference: string;
     name: string;
@@ -160,7 +162,11 @@ export declare type SbProductPayload = {
     img?: string;
     imgs?: string[];
     description?: string;
+    ean13?: string;
+    upc?: string;
     atttributes?: string;
+    id_category?: string;
+    category?: string;
 };
 export declare type SbProductPayloadFull = StockabeeAuth & SbProductPayload;
 export declare type SbProductPostResponse = {
